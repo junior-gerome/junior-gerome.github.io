@@ -25,26 +25,23 @@ export class ContactComponent {
   socials = [
     {
       name: "GitHub",
-      iconPath: "assets/icons/githublogo.png",
       url: "https://github.com/junior-gerome",
     },
     {
       name: "LinkedIn",
-      iconPath: "assets/icons/LinkedInLogo.png",
       url: "https://linkedin.com/in/junior-gerome",
     },
     {
       name: "Twitter",
-      iconPath: "assets/icons/twitterlogo.png",
       url: "https://twitter.com/juniorNguep",
     },
   ];
 
   constructor() {
     this.contactForm = this.fb.group({
-      name: ["", [Validators.required]],
+      name: ["", [Validators.required, Validators.minLength(2)]],
       email: ["", [Validators.required, Validators.email]],
-      subject: ["", [Validators.required]],
+      subject: ["", [Validators.required, Validators.minLength(3)]],
       message: ["", [Validators.required, Validators.minLength(10)]],
     });
   }
@@ -62,19 +59,30 @@ export class ContactComponent {
         next: (response) => {
           this.isSubmitting = false;
           this.toastMessage = response.message;
-          this.toastType = "success";
+          this.toastType = response.success ? "success" : "error";
           this.showToast = true;
-          this.contactForm.reset();
+
+          if (response.success) {
+            this.contactForm.reset();
+            Object.keys(this.contactForm.controls).forEach(key => {
+              const control = this.contactForm.get(key);
+              control?.setErrors(null);
+              control?.markAsPristine();
+              control?.markAsUntouched();
+            });
+          }
         },
         error: (error) => {
           this.isSubmitting = false;
           this.toastMessage =
-            "Erreur lors de l'envoi du message. Veuillez réessayer.";
+            "Une erreur inattendue est survenue. N'hésitez pas à me contacter directement par email.";
           this.toastType = "error";
           this.showToast = true;
           console.error("Error sending message:", error);
         },
       });
+    } else {
+      this.contactForm.markAllAsTouched();
     }
   }
 }

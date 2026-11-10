@@ -37,13 +37,13 @@ export class DataService {
       },
       {
         id: 3,
-        title: "Application de Gestion de Tontine ",
+        title: "Application de Gestion de Tontine",
         description:
-          "Dashboard application de tontine et visualisations interactives de l'historgramme des cotisations",
-        technologies: ["Angular", "Chart.js", "API REST", "Tailwind CSS"],
-        imageUrl: "https://via.placeholder.com/400x300",
-        githubUrl: "https://github.com/username/project3",
-        liveUrl: "https://project3.com",
+          "Dashboard financier pour association : visualisations interactives des cotisations, calendrier des tours et historique des versements.",
+        technologies: ["Angular", "Tailwind CSS", "API REST", "Spring boot"],
+        imageUrl: "assets/icons/portfolio.png",
+        githubUrl: "https://github.com/junior-gerome",
+        liveUrl: "",
         featured: false,
       },
       {
@@ -140,26 +140,26 @@ export class DataService {
     const posts: BlogPost[] = [
       {
         id: 1,
-        title: "Les nouveautés d'Angular 18",
+        title: "Les nouveautés d'Angular 18 & Signals",
         excerpt:
-          "Découvrez les dernières fonctionnalités d'Angular 18 et comment les utiliser dans vos projets.",
+          "Découvrez les dernières fonctionnalités d'Angular 18, le nouveau flux de contrôle déclaratif (@if, @for) et les Signals réactifs.",
         content: "Contenu complet de l'article...",
-        imageUrl: "https://via.placeholder.com/600x400",
+        imageUrl: "assets/icons/portfolio.png",
         author: "Junior Gerome",
-        publishDate: "2024-01-15",
-        tags: ["Angular", "JavaScript", "Web Dev"],
+        publishDate: "2024-05-20",
+        tags: ["Angular", "TypeScript", "Signals"],
         readTime: 5,
       },
       {
         id: 2,
-        title: "Guide complet de Tailwind CSS",
+        title: "Architecture Full Stack avec Spring Boot & Angular",
         excerpt:
-          "Maîtrisez Tailwind CSS pour créer des interfaces modernes et responsive.",
+          "Guide de structuration pour synchroniser les DTOs TypeScript et les modèles Java avec sécurité JWT et gestion d'erreurs cohérente.",
         content: "Contenu complet de l'article...",
-        imageUrl: "https://via.placeholder.com/600x400",
+        imageUrl: "assets/icons/portfolio.png",
         author: "Junior Gerome",
-        publishDate: "2024-01-10",
-        tags: ["CSS", "Tailwind", "Design"],
+        publishDate: "2024-06-15",
+        tags: ["Java", "Spring Boot", "Full Stack"],
         readTime: 8,
       },
     ];

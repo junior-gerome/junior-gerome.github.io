@@ -12,53 +12,44 @@ import { ButtonComponent } from '@app/shared/components/button/button.component'
 export class AboutComponent {
   values = [
     {
-      icon: "💡",
-      title: "Innovation",
-      description:
-        "Toujours à la recherche de solutions créatives et modernes pour résoudre les problèmes",
+      title: "Rigueur Technique",
+      description: "Architecture propre, typage strict, séparation des responsabilités et respect des patterns d'ingénierie.",
     },
     {
-      icon: "🤝",
-      title: "Collaboration",
-      description:
-        "Travail d'équipe et communication claire pour atteindre les objectifs communs",
+      title: "Collaboration & Clarté",
+      description: "Communication transparente, code documenté, revues de code constructives et écoute active des besoins produit.",
     },
     {
-      icon: "📚",
-      title: "Apprentissage",
-      description:
-        "Apprentissage continu et adaptation aux nouvelles technologies et pratiques",
+      title: "Apprentissage Continu",
+      description: "Veille constante sur l'écosystème Angular, Java Spring Boot et les évolutions des standards du Web.",
     },
   ];
 
   education = [
     {
-      degree: "Licence en Genie Logiciel",
-      school: "Institut Universitaire du Golfe de Guinnee (IUG)",
+      degree: "Licence en Génie Logiciel",
+      school: "Institut Universitaire du Golfe de Guinée (IUG)",
       year: "2023 - 2024",
+      detail: "Conception d'architectures logicielles, bases de données avancées, ingénierie des exigences et sécurité web.",
     },
     {
-      degree: "BTS en Genie Logiciel",
-      school: "Institut Universitaire du Golfe de Guinnee (IUG)",
+      degree: "BTS en Génie Logiciel",
+      school: "Institut Universitaire du Golfe de Guinée (IUG)",
       year: "2022 - 2023",
+      detail: "Algorithmique, programmation orientée objet (Java), développement web et modélisation UML.",
     },
   ];
 
   certifications = [
     {
-      name: "Angular Advanced Certification",
-      issuer: "Google Developers",
+      name: "Développement Frontend Moderne Angular",
+      issuer: "Pratiques Industrielles & Certifications Techniques",
+      year: "2024",
+    },
+    {
+      name: "Architecture & Sécurité Spring Boot",
+      issuer: "Spécialisation Backend",
       year: "2023",
-    },
-    {
-      name: "AWS Certified Developer",
-      issuer: "Amazon Web Services",
-      year: "2022",
-    },
-    {
-      name: "Professional Scrum Master",
-      issuer: "Scrum.org",
-      year: "2021",
     },
   ];
 }

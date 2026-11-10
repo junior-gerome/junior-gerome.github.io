@@ -2,40 +2,57 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ButtonComponent } from '@app/shared/components/button/button.component';
+import { BadgeComponent } from '@app/shared/components/badge/badge.component';
 
 @Component({
   selector: "app-home",
   standalone: true,
-  imports: [CommonModule, RouterModule, ButtonComponent],
+  imports: [CommonModule, RouterModule, ButtonComponent, BadgeComponent],
   templateUrl: "./home.component.html",
   styleUrl: "./home.component.scss",
 })
 export class HomeComponent {
-  stats = [
-    { value: "2+", label: "Années d'expérience" },
-    { value: "5+", label: "Projets réalisés" },
-    { value: "2+", label: "Clients satisfaits" },
-    { value: "100%", label: "Engagement" },
+  techStack = [
+    { name: "Angular 18", category: "frontend" },
+    { name: "TypeScript", category: "frontend" },
+    { name: "Tailwind CSS", category: "frontend" },
+    { name: "Java & Spring Boot", category: "backend" },
+    { name: "MySQL", category: "database" },
+    { name: "Architecture OnPush", category: "architecture" },
   ];
 
-  features = [
+  pillars = [
     {
-      icon: "⚡",
-      title: "Performance",
-      description:
-        "Applications rapides et optimisées pour une expérience utilisateur fluide",
+      title: "Architecture Frontend Réactive",
+      description: "Conception de modules Angular scalables basés sur les Signals, la détection de changement OnPush et des formulaires stricts.",
+      tag: "Angular & Signals",
     },
     {
-      icon: "🎨",
-      title: "Design Moderne",
-      description:
-        "Interfaces élégantes et responsive qui s'adaptent à tous les écrans",
+      title: "Services & APIs Résilientes",
+      description: "Développement d'APIs RESTful performantes avec Java Spring Boot, séparation stricte DTO/Entity et transactions atomiques.",
+      tag: "Java & Spring Boot",
     },
     {
-      icon: "🔒",
-      title: "Sécurité",
-      description:
-        "Code sécurisé et respect des meilleures pratiques de développement",
+      title: "Craft UI & Ergonomie",
+      description: "Design systems réutilisables, respect rigoureux des contrastes (WCAG AA), accessibilité clavier et réactivité sur tous les écrans.",
+      tag: "Tailwind & UX",
+    },
+  ];
+
+  selectedProjects = [
+    {
+      title: "Gestion d'école primaire",
+      role: "Lead Full Stack",
+      stack: ["Angular", "Spring Boot", "MySQL", "Tailwind CSS"],
+      description: "Plateforme complète : inscriptions dématérialisées, relevés académiques et module de suivi des paiements.",
+      link: "/projects",
+    },
+    {
+      title: "Gestion académique IBA",
+      role: "Développeur Full Stack",
+      stack: ["Blade", "Laravel", "MySQL", "Java"],
+      description: "Génération de relevés de notes officiels, certificats de scolarité et cartes d'étudiants numérisées.",
+      link: "/projects",
     },
   ];
 }
