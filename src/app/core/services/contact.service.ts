@@ -9,10 +9,8 @@ import { ContactForm, ContactResponse } from '../models/contact.model';
 export class ContactService {
   private http = inject(HttpClient);
 
-  // Clé d'anonymisation FormSubmit (protège l'adresse email contre le scraping)
+  // Clé d'anonymisation FormSubmit activée
   private formSubmitToken = 'db1a245ab88449a1664fe36b3f23e1f3';
-  
-  // Endpoint AJAX FormSubmit sécurisé avec token
   private formSubmitUrl = `https://formsubmit.co/ajax/${this.formSubmitToken}`;
 
   sendMessage(formData: ContactForm): Observable<ContactResponse> {
@@ -33,9 +31,12 @@ export class ContactService {
 
     return this.http.post<any>(this.formSubmitUrl, payload, { headers }).pipe(
       map((res) => {
+        const isSuccess = res && (res.success === true || res.success === 'true');
         return {
-          success: true,
-          message: 'Votre message a bien été envoyé ! Je vous répondrai dans les plus brefs délais.'
+          success: isSuccess,
+          message: isSuccess
+            ? 'Votre message a bien été envoyé ! Je vous répondrai dans les plus brefs délais.'
+            : (res?.message || 'Une erreur est survenue lors de l\'envoi.')
         };
       }),
       catchError((error) => {

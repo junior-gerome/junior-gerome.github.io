@@ -50,11 +50,11 @@ export class DataService {
         id: 4,
         title: "Mon Portfolio",
         description:
-          "Réalisation de mon portfolio; graçe à lui vous avez une  présentation  detaillé de moi et de mes différentes réalisations",
-        technologies: ["Angular", "Tailwind CSS"],
+          "Portfolio d'ingénieur Full Stack : présentation détaillée de mes compétences, architecture modulaire et réalisations concrètes.",
+        technologies: ["Angular 18", "Tailwind CSS", "TypeScript"],
         imageUrl: "assets/icons/portfolio.png",
-        githubUrl: "https://junior-gerome/portfolio/",
-        liveUrl: "https://junior-gerome.github.io/portfolio/",
+        githubUrl: "https://github.com/junior-gerome/junior-gerome.github.io",
+        liveUrl: "https://junior-gerome.github.io/",
         featured: false,
       },
     ];
