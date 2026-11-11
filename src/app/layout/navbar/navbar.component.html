@@ -61,17 +61,17 @@
         <button
           (click)="toggleMobileMenu()"
           type="button"
-          class="md:hidden p-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/80 cursor-pointer focus-visible:ring-2 focus-visible:ring-primary-500"
-          [attr.aria-label]="mobileMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'"
-          [attr.aria-expanded]="mobileMenuOpen"
+          class="md:hidden w-10 h-10 flex items-center justify-center rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/80 active:bg-slate-200 dark:active:bg-slate-800 cursor-pointer focus-visible:ring-2 focus-visible:ring-primary-500 touch-manipulation"
+          [attr.aria-label]="mobileMenuOpen() ? 'Fermer le menu' : 'Ouvrir le menu'"
+          [attr.aria-expanded]="mobileMenuOpen()"
         >
           <svg
-            class="w-6 h-6"
+            class="w-6 h-6 pointer-events-none"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
           >
-            @if (!mobileMenuOpen) {
+            @if (!mobileMenuOpen()) {
               <path
                 stroke-linecap="round"
                 stroke-linejoin="round"
@@ -90,22 +90,37 @@
         </button>
       </div>
     </div>
-
-    <!-- Mobile Dropdown Menu -->
-    @if (mobileMenuOpen) {
-      <div class="md:hidden py-3 px-2 border-t border-slate-200 dark:border-slate-800 space-y-1 animate-fade-in bg-white/95 dark:bg-slate-950/95">
-        @for (link of navLinks; track link.path) {
-          <a
-            [routerLink]="link.path"
-            routerLinkActive="bg-slate-100 dark:bg-slate-800 text-primary-600 dark:text-primary-400 font-semibold"
-            [routerLinkActiveOptions]="{ exact: link.path === '/' }"
-            (click)="closeMobileMenu()"
-            class="block px-3.5 py-2.5 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-colors"
-          >
-            {{ link.label }}
-          </a>
-        }
-      </div>
-    }
   </div>
+
+  <!-- Mobile Dropdown Menu with Backdrop Overlay -->
+  @if (mobileMenuOpen()) {
+    <!-- Backdrop overlay to dismiss on outside click -->
+    <div
+      class="fixed inset-0 top-16 bg-slate-950/40 backdrop-blur-sm z-40 md:hidden animate-fade-in"
+      (click)="closeMobileMenu()"
+      aria-hidden="true"
+    ></div>
+
+    <!-- Mobile Drawer Panel -->
+    <div
+      class="fixed inset-x-0 top-16 z-50 md:hidden bg-white/98 dark:bg-slate-950/98 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shadow-2xl px-4 py-4 space-y-1 max-h-[calc(100vh-4rem)] overflow-y-auto"
+      role="navigation"
+      aria-label="Navigation mobile"
+    >
+      @for (link of navLinks; track link.path) {
+        <a
+          [routerLink]="link.path"
+          routerLinkActive="bg-primary-50 dark:bg-primary-950/60 text-primary-600 dark:text-primary-400 font-semibold"
+          [routerLinkActiveOptions]="{ exact: link.path === '/' }"
+          (click)="navigateTo(link.path, $event)"
+          class="flex items-center justify-between px-4 py-3 rounded-xl text-base font-medium text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-900 active:bg-slate-200 dark:active:bg-slate-800 transition-colors touch-manipulation cursor-pointer"
+        >
+          <span>{{ link.label }}</span>
+          <svg class="w-4 h-4 text-slate-400 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </a>
+      }
+    </div>
+  }
 </nav>

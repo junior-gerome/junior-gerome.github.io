@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Component, OnInit, inject, signal } from '@angular/core';
+import { NavigationEnd, Router, RouterModule } from '@angular/router';
+import { filter } from 'rxjs/operators';
 import { ThemeService } from '../../core/services/theme.service';
 
 @Component({
@@ -10,9 +11,11 @@ import { ThemeService } from '../../core/services/theme.service';
   templateUrl: "./navbar.component.html",
   styleUrl: "./navbar.component.scss",
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
   themeService = inject(ThemeService);
-  mobileMenuOpen = false;
+  private router = inject(Router);
+
+  mobileMenuOpen = signal(false);
 
   navLinks = [
     { path: "/", label: "Accueil" },
@@ -24,15 +27,33 @@ export class NavbarComponent {
     { path: "/contact", label: "Contact" },
   ];
 
+  ngOnInit(): void {
+    // Ferme automatiquement le menu mobile dès qu'une navigation est terminée
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe(() => {
+        this.mobileMenuOpen.set(false);
+      });
+  }
+
   toggleTheme(): void {
     this.themeService.toggleTheme();
   }
 
   toggleMobileMenu(): void {
-    this.mobileMenuOpen = !this.mobileMenuOpen;
+    this.mobileMenuOpen.update((open) => !open);
   }
 
   closeMobileMenu(): void {
-    this.mobileMenuOpen = false;
+    this.mobileMenuOpen.set(false);
+  }
+
+  navigateTo(path: string, event?: Event): void {
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+    this.mobileMenuOpen.set(false);
+    this.router.navigateByUrl(path);
   }
 }

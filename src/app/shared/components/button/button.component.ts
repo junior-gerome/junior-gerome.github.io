@@ -1,20 +1,24 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: "app-button",
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: "./button.component.html",
   styleUrl: "./button.component.scss",
 })
 export class ButtonComponent {
+  private router = inject(Router);
+
   @Input() type: "button" | "submit" | "reset" = "button";
   @Input() variant: "primary" | "secondary" | "outline" | "ghost" = "primary";
   @Input() size: "sm" | "md" | "lg" = "md";
   @Input() disabled = false;
   @Input() loading = false;
   @Input() fullWidth = false;
+  @Input() routerLink?: string | any[];
   @Output() clicked = new EventEmitter<Event>();
 
   get buttonClasses(): string {
@@ -46,6 +50,13 @@ export class ButtonComponent {
   handleClick(event: Event): void {
     if (!this.disabled && !this.loading) {
       this.clicked.emit(event);
+      if (this.routerLink) {
+        if (typeof this.routerLink === 'string') {
+          this.router.navigateByUrl(this.routerLink);
+        } else if (Array.isArray(this.routerLink)) {
+          this.router.navigate(this.routerLink);
+        }
+      }
     }
   }
 }
